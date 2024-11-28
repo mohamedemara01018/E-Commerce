@@ -1,10 +1,14 @@
+import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
+import { setSidebarOn } from "../../store/slices/sidebarSlice"
 
 function Navbar() {
+    const dispatch = useDispatch()
+    
     return (
-        <div className='navbar'>
+        <nav className='navbar'>
             <div className="header-container-bottom-l">
-                <button>
+                <button onClick={() => dispatch(setSidebarOn())}>
                     <i className="fa-solid fa-list"></i>
                 </button>
                 <Link to={'/'}>
@@ -28,15 +32,18 @@ function Navbar() {
 
                     <div className="category">
                         <ul>
-                            <li>dkfdjfkdfj</li>
-                            <li>dkfdjfkdfj</li>
-                            <li>dkfdjfkdfj</li>
-                            <li>dkfdjfkdfj</li>
-                            <li>dkfdjfkdfj</li>
-                            <li>dkfdjfkdfj</li>
-                            <li>dkfdjfkdfj</li>
-                            <li>dkfdjfkdfj</li>
-                            <li>dkfdjfkdfj</li>
+                            <li><Link to={'/category/val'}>ddfdfddfdf</Link></li>
+                            <li><Link to={'/category/val'}>ddfdfddfdf</Link></li>
+                            <li><Link to={'/category/val'}>ddfdfddfdf</Link></li>
+                            <li><Link to={'/category/val'}>ddfdfddfdf</Link></li>
+                            <li><Link to={'/category/val'}>ddfdfddfdf</Link></li>
+                            <li><Link to={'/category/val'}>ddfdfddfdf</Link></li>
+                            <li><Link to={'/category/val'}>ddfdfddfdf</Link></li>
+                            <li><Link to={'/category/val'}>ddfdfddfdf</Link></li>
+                            <li><Link to={'/category/val'}>ddfdfddfdf</Link></li>
+
+
+
                         </ul>
                     </div>
                 </div>
@@ -47,7 +54,7 @@ function Navbar() {
                     <i className="fa-solid fa-cart-shopping"></i>
                 </Link>
             </div>
-        </div>
+        </nav>
     )
 }
 

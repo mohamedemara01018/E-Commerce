@@ -103,6 +103,7 @@ header {
 
     .header-container-bottom-m {
         width: 100%;
+
         .input-container {
             position: relative;
             width: 100%;
@@ -147,7 +148,6 @@ header {
         }
     }
 
-
     .header-container-bottom-r {
         a {
             position: relative;
@@ -173,4 +173,19 @@ header {
     }
 
 
+}
+
+
+@media (max-width:605px) {
+    .header-container-top {
+        flex-direction: column;
+    }
+}
+
+@media (max-width:770px) {
+    .header-container-bottom-m {
+        .category {
+            display: none;
+        }
+    }
 }

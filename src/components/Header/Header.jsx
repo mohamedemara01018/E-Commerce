@@ -2,6 +2,7 @@
 import './Header.css'
 import { header_top_left, header_top_right } from '../../data'
 import Navbar from './Navbar'
+import { Link } from 'react-router-dom'
 
 function Header() {
     return (
@@ -14,7 +15,7 @@ function Header() {
                                 {
                                     header_top_left.map((val) => {
                                         return <li key={val.id}>
-                                            <a href="" >{val.title}</a>
+                                            <Link to={val.title.replace(' ', '')} >{val.title}</Link>
                                         </li>
 
                                     })
@@ -38,10 +39,10 @@ function Header() {
                                 {
                                     header_top_right.map((val) => {
                                         return <li key={val.id}>
-                                            <a>
+                                            <Link to={val.title.replace(' ', '')}>
                                                 {val.id == 1 && <i className='fa-solid fa-circle-question'></i>}
                                                 {val.title}
-                                            </a>
+                                            </Link>
                                         </li>
                                     })
                                 }
