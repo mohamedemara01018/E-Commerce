@@ -1,0 +1,107 @@
+.product-list {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+
+}
+
+.product-list a {
+    background: var(--clr-white);
+    flex-basis: 200px;
+    flex-grow: 1;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.137);
+    
+
+    .img {
+        width: 100%;
+        height: 250px;
+        position: relative;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        h2 {
+            position: absolute;
+            left: -5px;
+            top: 1.6rem;
+            background-color: var(--clr-orange);
+            color: var(--clr-white);
+            font-size: 13px;
+            text-transform: capitalize;
+            padding: 0.2rem 1rem;
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+
+            &::after {
+                position: absolute;
+                content: "";
+                left: 0;
+                top: 100%;
+                transform: translateY(-5px);
+                width: 0;
+                height: 0;
+                border-top: 5px solid transparent;
+                border-bottom: 5px solid transparent;
+                border-right: 5px solid var(--clr-orange);
+            }
+        }
+    }
+
+    .product-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+
+        .brand {
+            font-size: 13px;
+            color: rgba(0, 0, 0, 0.6);
+
+            span {
+                color: rgba(0, 0, 0, 0.361);
+                font-weight: 400;
+                margin-right: 5px;
+            }
+        }
+
+        .product-title {
+            font-size: 14px;
+            text-align: center;
+            color: rgba(0, 0, 0, 0.361);
+        }
+        .price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding-inline: 40px;
+            gap: 10px;
+            
+            font-size: 14px;
+            .old-price {
+                text-decoration: line-through;
+                color: rgba(0, 0, 0, 0.274);
+                
+            }
+            .offer {
+                color: var(--clr-light-orange);
+            }
+        }
+        .line {
+            background: var(--clr-orange);
+            text-align: center;
+            width: 50%;
+            border: 1px solid rgb(244, 207, 139);
+            margin-bottom: 10px;
+        }
+    }
+
+
+}
+
+.product-list a:nth-last-child(1),.product-list a:nth-last-child(2), .product-list a:nth-last-child(3) {
+    flex-grow: 0;
+}

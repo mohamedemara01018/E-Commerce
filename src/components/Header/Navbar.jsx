@@ -3,12 +3,12 @@ import { Link } from "react-router-dom"
 import { setSidebarOn } from "../../store/slices/sidebarSlice"
 import { fetchCategories, getCategoryState } from "../../store/slices/categorySlice"
 import { useEffect } from "react"
+import { STATUS } from "../../utils/status"
 
 function Navbar() {
     const dispatch = useDispatch()
     // return {categories: [], categoryStatue:'succeded'}
     const category = useSelector(getCategoryState);
-    
 
     useEffect(() => {
         dispatch(fetchCategories());
@@ -39,15 +39,15 @@ function Navbar() {
                         </Link>
                     </div>
 
-
                     <div className="category">
                         <ul>
                             {
-                                category && category.categories && category.categories.slice(0, 8).map((cat, ind) => {
-                                    return <li key={ind}>
-                                        <Link to={`/category/${cat.name.replace(' ', '')}`}>{cat.name}</Link>
-                                    </li>
-                                })
+                                category.categoryStatus == STATUS.LOADING || category.categoryStatus == STATUS.IDLE ? <li>...........................</li>
+                                    : category && category.categories && category.categories.slice(0, 8).map((cat, ind) => {
+                                        return <li key={ind}>
+                                            <Link to={`/category/${cat.name.replace(' ', '')}`}>{cat.name}</Link>
+                                        </li>
+                                    })
                             }
                         </ul>
                     </div>
