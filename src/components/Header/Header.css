@@ -182,7 +182,7 @@ header {
     }
 }
 
-@media (max-width:770px) {
+@media (max-width:878px) {
     .header-container-bottom-m {
         .category {
             display: none;

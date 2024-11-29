@@ -1,10 +1,20 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { setSidebarOn } from "../../store/slices/sidebarSlice"
+import { fetchCategories, getCategoryState } from "../../store/slices/categorySlice"
+import { useEffect } from "react"
 
 function Navbar() {
     const dispatch = useDispatch()
+    // return {categories: [], categoryStatue:'succeded'}
+    const category = useSelector(getCategoryState);
     
+
+    useEffect(() => {
+        dispatch(fetchCategories());
+    }, [dispatch])
+
+
     return (
         <nav className='navbar'>
             <div className="header-container-bottom-l">
@@ -32,18 +42,13 @@ function Navbar() {
 
                     <div className="category">
                         <ul>
-                            <li><Link to={'/category/val'}>ddfdfddfdf</Link></li>
-                            <li><Link to={'/category/val'}>ddfdfddfdf</Link></li>
-                            <li><Link to={'/category/val'}>ddfdfddfdf</Link></li>
-                            <li><Link to={'/category/val'}>ddfdfddfdf</Link></li>
-                            <li><Link to={'/category/val'}>ddfdfddfdf</Link></li>
-                            <li><Link to={'/category/val'}>ddfdfddfdf</Link></li>
-                            <li><Link to={'/category/val'}>ddfdfddfdf</Link></li>
-                            <li><Link to={'/category/val'}>ddfdfddfdf</Link></li>
-                            <li><Link to={'/category/val'}>ddfdfddfdf</Link></li>
-
-
-
+                            {
+                                category && category.categories && category.categories.slice(0, 8).map((cat, ind) => {
+                                    return <li key={ind}>
+                                        <Link to={`/category/${cat.name.replace(' ', '')}`}>{cat.name}</Link>
+                                    </li>
+                                })
+                            }
                         </ul>
                     </div>
                 </div>
