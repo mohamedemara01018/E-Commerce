@@ -14,7 +14,6 @@ function Navbar() {
         dispatch(fetchCategories());
     }, [dispatch])
 
-
     return (
         <nav className='navbar'>
             <div className="header-container-bottom-l">
@@ -45,7 +44,7 @@ function Navbar() {
                                 category.categoryStatus == STATUS.LOADING || category.categoryStatus == STATUS.IDLE ? <li>...........................</li>
                                     : category && category.categories && category.categories.slice(0, 8).map((cat, ind) => {
                                         return <li key={ind}>
-                                            <Link to={`/category/${cat.name.replace(' ', '')}`}>{cat.name}</Link>
+                                            <Link to={`/category/${cat.slug}`}>{cat.name}</Link>
                                         </li>
                                     })
                             }

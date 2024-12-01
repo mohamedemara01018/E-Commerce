@@ -24,7 +24,7 @@ function Sidebar() {
                     category && category.categories && category.categories.map((cat) => {
                         return <li key={cat.name}>
                             {/* when onclick, the sidebar will be closed */}
-                            <Link onClick={() => dispatch(setSidebarOff())} to={`/category/${cat.name.replace(' ', '')}`}>{cat.name}</Link>
+                            <Link onClick={() => dispatch(setSidebarOff())} to={`/category/${cat.slug}`}>{cat.name}</Link>
                         </li>
                     })
                 }
