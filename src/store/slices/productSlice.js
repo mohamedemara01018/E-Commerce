@@ -7,13 +7,18 @@ export const fetchProducts = createAsyncThunk('productSlice/fetchProducts', asyn
     const data = await res.json();
     return data.products
 })
+export const fetchSingleProduct = createAsyncThunk('productSlice/fetchSingleProduct', async (id) => {
+    const res = await fetch(`${BASEURL}products/${id}`);
+    const data = await res.json();
+    return data;
+})
 const productSlice = createSlice({
     name: 'productSlice',
     initialState: {
         products: [],
         productsStatus: STATUS.IDLE,
-        singleProduct: [],
-        singelProductStatus: STATUS.IDLE,
+        singleProduct: {},
+        singleProductStatus: STATUS.IDLE,
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -30,7 +35,17 @@ const productSlice = createSlice({
                 state.productsStatus = STATUS.FAILED;
                 state.products = action.error;
             })
-
+            .addCase(fetchSingleProduct.pending, (state) => {
+                state.singleProductStatus = STATUS.LOADING;
+            })
+            .addCase(fetchSingleProduct.fulfilled, (state, action) => {
+                state.singleProductStatus = STATUS.SUCCEEDED;
+                state.singleProduct = action.payload;
+            })
+            .addCase(fetchSingleProduct.rejected, (state, action) => {
+                state.singleProductStatus = STATUS.FAILED;
+                state.singleProduct = action.error;
+            })
     }
 })
 
@@ -44,4 +59,4 @@ export const getProductStatus = (state) => state.product.productsStatus;
 
 // single products
 export const getSingleProduct = (state) => state.product.singleProduct;
-export const getSingleProductStatus = (state) => state.product.singelProductStatus;
+export const getSingleProductStatus = (state) => state.product.singleProductStatus;

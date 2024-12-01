@@ -22,21 +22,27 @@ function Home() {
   useEffect(() => {
     dispatch(fetchProducts(50))
   }, [dispatch])
-  let productOftheFirstCategory = products.filter((product) => {
 
-    return product.category == category[0].slug;
-  })
-  let productOftheSecondCategory = products.filter((product) => {
-    return product.category == category[1].slug;
+  let productOftheFirstCategory,
+    productOftheSecondCategory,
+    productOftheThirdCategory,
+    productOftheFourthCategory = []
+  if (Array.isArray(products) && category) {
+    productOftheFirstCategory = products.filter((product) => {
+      return product.category == category[0].slug;
+    })
+    productOftheSecondCategory = products.filter((product) => {
+      return product.category == category[1].slug;
 
-  })
-  const productOftheThirdCategory = products.filter((product) => {
-    return product.category == category[2].slug;
+    })
+    productOftheThirdCategory = products.filter((product) => {
+      return product.category == category[2].slug;
 
-  })
-  const productOftheFourthCategory = products.filter((product) => {
-    return product.category == category[3].slug;
-  })
+    })
+    productOftheFourthCategory = products.filter((product) => {
+      return product.category == category[3].slug;
+    })
+  };
 
 
 
@@ -50,8 +56,6 @@ function Home() {
       tempProduct[i] = products[ind]
     }
   }
-  console.log(tempProduct)
-  console.log(productOftheFirstCategory)
   const sections = [tempProduct, productOftheFirstCategory, productOftheSecondCategory, productOftheThirdCategory, productOftheFourthCategory]
 
 

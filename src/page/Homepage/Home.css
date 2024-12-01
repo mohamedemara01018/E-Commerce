@@ -5,10 +5,20 @@ main {
 .slider-wraper {
     background: var(--clr-white);
     padding-block: 2rem;
-    
+
     .slider {
         padding-top: 1.2rem;
         overflow: hidden;
+
+        div {
+            width: 100%;
+            height: 100%;
+
+            img {
+                width: 100%;
+                object-fit: cover;
+            }
+        }
     }
 }
 
