@@ -51,7 +51,7 @@ const cartSlice = createSlice({
             state.carts.map((item) => {
                 tempAmount += item.quantity * item.discountPrice;
             })
-            state.totalAmount = tempAmount
+            state.totalAmount = tempAmount.toFixed(2)
             state.totalCount = state.carts.length;
         },
 
