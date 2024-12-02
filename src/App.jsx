@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify"
 
 //css to toast
 import 'react-toastify/dist/ReactToastify.css';
+import Cart from "./page/cart/Cart"
 function App() {
   return (
     <>
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<SingleProduct />} />
         <Route path="/category/:category" element={<CategoryProductPage />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
 
       <Footer />

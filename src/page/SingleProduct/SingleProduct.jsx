@@ -10,7 +10,7 @@ import Price_and_offer from "./singleProductComponents/Price_and_offer";
 import Change_quantity from "./singleProductComponents/Change_quantity";
 import Btns from "./singleProductComponents/Btns";
 import Img_thumb from "./singleProductComponents/Img_thumb";
-import { addToCard, getCarts } from "../../store/slices/cartSlice";
+import { addToCard } from "../../store/slices/cartSlice";
 
 
 function SingleProduct() {
@@ -19,8 +19,8 @@ function SingleProduct() {
     const productStatus = useSelector(getSingleProductStatus)
     const { id } = useParams();
     const [quantity, setQuantity] = useState(1);
-    const cart = useSelector(getCarts);
-    console.log(cart);
+
+
 
 
     useEffect(() => {
@@ -50,13 +50,10 @@ function SingleProduct() {
     }
 
     function addToCart(item) {
-        const discountPrice = item.price - (item.price * (item.discountPercentage) / 100).toFixed(2);
-        const totalPrice = discountPrice.toFixed(2) * quantity;
-
+        const discountPrice = (item.price - (item.price * (item.discountPercentage) / 100)).toFixed(2);
+        const totalPrice = (discountPrice * quantity).toFixed(2);
         dispatch(addToCard({ ...item, totalPrice: totalPrice, discountPrice: discountPrice, quantity: quantity }))
-        
     }
-
     return (
 
         <main>

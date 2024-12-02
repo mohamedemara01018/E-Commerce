@@ -1,0 +1,232 @@
+.cart {
+    background: var(--clr-light-gray);
+}
+
+.cart-content {
+    padding-block: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    tr,
+    tr td button {
+        display: flex;
+        align-items: center;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 14px;
+        transition: 0.2s;
+
+        td,
+        th {
+            padding-left: 20px;
+            text-align: start;
+            flex-basis: 200px;
+        }
+
+        td:first-child,
+        th:first-child {
+            flex-basis: 80px;
+        }
+
+        td:nth-child(2),
+        th:nth-child(2) {
+            flex-basis: 150px;
+        }
+
+        td:nth-child(3),
+        th:nth-child(3) {
+            flex-basis: 350px;
+        }
+    }
+
+    tr td button:hover {
+        transform: scale(1.1);
+        color: var(--clr-orange);
+
+    }
+
+    thead,
+    tbody {
+        width: 100%;
+        background: var(--clr-white);
+        padding: 1rem;
+
+    }
+
+    tbody {
+        tr {
+            border-bottom: 1px solid rgb(236, 236, 236);
+
+            td {
+                .img-cover {
+                    padding: 2px;
+                    background: var(--clr-white);
+                    width: 6rem;
+                    height: 6rem;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
+                .change-quantity {
+                    display: flex;
+                    align-items: center;
+
+                    button,
+                    div {
+                        font-size: small;
+                        width: 2rem;
+                        height: 2rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border: 1px solid rgba(0, 0, 0, 0.1);
+
+                    }
+
+                    div {
+                        padding-inline: 1.5rem;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+
+
+}
+
+.cart-content-bottom {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    padding: 2rem;
+    background: var(--clr-white);
+
+    button {
+        padding: 0.5rem;
+        border: 1px solid var(--clr-orange);
+        color: var(--clr-orange);
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: 0.3s;
+    }
+
+
+    button:hover {
+        color: var(--clr-light-gray);
+        background: var(--clr-orange);
+    }
+
+    .total-price {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+
+        .total {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: small;
+            color: rgba(0, 0, 0, 0.507);
+
+            span {
+                color: var(--clr-orange);
+                font-size: 2rem;
+                font-weight: bold;
+            }
+        }
+
+        .btn {
+            width: 100%;
+            text-align: center;
+
+            button {
+                all: unset;
+                font-size: 1.2rem;
+                padding: 0.5rem;
+                color: var(--clr-light-gray);
+                width: 100%;
+                background: var(--clr-orange);
+            }
+
+            button:hover {
+                cursor: pointer;
+            }
+        }
+
+
+
+    }
+}
+
+.cart-empty {
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.4rem;
+
+    img {
+        width: 200px;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+        color: rgb(82, 82, 82);
+    }
+
+    a {
+        padding: 1rem 3rem;
+        background: var(--clr-orange);
+        color: var(--clr-light-gray);
+        text-align: center;
+    }
+
+}
+
+@media (max-width:570px) {
+    table {
+        tr {
+
+            td,
+            th,
+            td button {
+                font-size: 10px;
+                color: rgba(0, 0, 0, 1);
+            }
+
+            td:nth-child(2),
+            th:nth-child(2) {
+                display: none;
+            }
+        }
+    }
+}
+
+@media (max-width:400px) {
+    table {
+        tr {
+
+            td,
+            th,
+            td button {
+                font-size: 8px;
+
+            }
+        }
+    }
+}

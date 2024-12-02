@@ -4,16 +4,20 @@ import { setSidebarOn } from "../../store/slices/sidebarSlice"
 import { fetchCategories, getCategoryState } from "../../store/slices/categorySlice"
 import { useEffect } from "react"
 import { STATUS } from "../../utils/status"
+import { getCarts, getCartTotal, getTotalCount } from "../../store/slices/cartSlice"
 
 function Navbar() {
     const dispatch = useDispatch()
-    // return {categories: [], categoryStatue:'succeded'}
     const category = useSelector(getCategoryState);
+    const totalCount = useSelector(getTotalCount);
+    const cart = useSelector(getCarts)
 
     useEffect(() => {
         dispatch(fetchCategories());
     }, [dispatch])
-
+    useEffect(() => {
+        dispatch(getCartTotal())
+    }, [totalCount, dispatch,cart])
     return (
         <nav className='navbar'>
             <div className="header-container-bottom-l">
@@ -53,8 +57,8 @@ function Navbar() {
                 </div>
             </div>
             <div className="header-container-bottom-r">
-                <Link to={'/card'}>
-                    <span>0</span>
+                <Link to={'/cart'}>
+                    <span>{totalCount}</span>
                     <i className="fa-solid fa-cart-shopping"></i>
                 </Link>
             </div>
