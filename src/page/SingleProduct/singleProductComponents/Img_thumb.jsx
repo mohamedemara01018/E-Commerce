@@ -5,24 +5,11 @@ function Img_thumb({ product }) {
     return (
         <div className="single-product-img-thumb">
             {
-                product ? (product.images ? <div className="thumb-item">
-                    <img src={product ? (product.images ? product.images[1] : "") : ""} alt="" loading="lazy" />
-                </div> : null) : null
-            }
-            {
-                product ? (product.images ? <div className="thumb-item">
-                    <img src={product ? (product.images ? product.images[2] : null) : null} alt="" loading="lazy" />
-                </div> : null) : null
-            }
-            {
-                product ? (product.images ? <div className="thumb-item">
-                    <img src={product ? (product.images ? product.images[3] : "") : ""} alt="" loading="lazy" />
-                </div> : null) : null
-            }
-            {
-                product ? (product.images ? <div className="thumb-item">
-                    <img src={product ? (product.images ? product.images[4] : "") : ""} alt="" loading="lazy" />
-                </div> : null) : null
+                product && product.images && product.images.slice(1, 5).map((img, ind) => {
+                    return <div className="thumb-item" key={ind}>
+                        <img src={img} alt="" loading="lazy" />
+                    </div>
+                })
             }
         </div>
     )

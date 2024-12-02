@@ -171,32 +171,7 @@ table {
     }
 }
 
-.cart-empty {
-    width: 100%;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1.4rem;
 
-    img {
-        width: 200px;
-    }
-
-    h3 {
-        font-size: 1.5rem;
-        color: rgb(82, 82, 82);
-    }
-
-    a {
-        padding: 1rem 3rem;
-        background: var(--clr-orange);
-        color: var(--clr-light-gray);
-        text-align: center;
-    }
-
-}
 
 @media (max-width:570px) {
     table {

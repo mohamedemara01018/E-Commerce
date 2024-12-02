@@ -1,47 +1,22 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import Change_quantity from "../SingleProduct/singleProductComponents/Change_quantity"
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, deleteProduct, getCarts, getCartTotal, getTotalAmount, getTotalCount } from "../../store/slices/cartSlice";
+import { clearCart, deleteProduct, getCarts, getCartTotal, getTotalAmount, getTotalCount, toggleQuantity } from "../../store/slices/cartSlice";
 import './Cart.css'
-import { shopping_cart } from "../../utils/image";
-import { Link } from "react-router-dom";
+import Card_Empty from "../../components/cart-empty/Card_Empty";
 function Cart() {
     const cart = useSelector(getCarts);
     const totalAmount = useSelector(getTotalAmount);
     const totalCount = useSelector(getTotalCount);
-    const [quantity, setQuantity] = useState(1);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getCartTotal())
-    }, [cart])
+    }, [cart, dispatch])
     console.log(cart)
     if (totalCount <= 0) {
-        return <div className="cart-empty">
-            <img src={shopping_cart} alt="" />
-            <h3>Your shopping cart is empty.</h3>
-            <Link to={'/'}>
-                Go Shopping Now
-            </Link>
-        </div>
+        return <Card_Empty />
     }
 
-    function decrement() {
-        setQuantity((prev) => {
-            if (quantity > 1) {
-                prev = prev - 1
-            }
-            return prev
-        }
-        )
-    }
-    function increment() {
-        setQuantity(
-            (prev) => {
-                prev = prev + 1
-                return prev
-            }
-        )
-    }
     function clearTheCart() {
         dispatch(clearCart())
     }
@@ -49,7 +24,9 @@ function Cart() {
     function handledeleteProduct(id) {
         dispatch(deleteProduct(id))
     }
-    console.log(quantity);
+    function handleToggleQuantity(product) {
+        dispatch(toggleQuantity(product))
+    }
     return (
         <div className="cart">
             <div className="container">
@@ -78,9 +55,9 @@ function Cart() {
                                                 </div>
                                             </td>
                                             <td>{product.title}</td>
-                                            <td>${product.discountPrice}</td>
-                                            <td><Change_quantity decrement={() => decrement()} increment={() => increment()} quantity={product.quantity} appearH1={false} /></td>
-                                            <td>${product.totalPrice}</td>
+                                            <td>${product.discountPrice.toFixed(2)}</td>
+                                            <td><Change_quantity decrement={() => handleToggleQuantity({ ...product, type: 'DEC' })} increment={() => handleToggleQuantity({ ...product, type: 'INC' })} quantity={product.quantity} appearH1={false} /></td>
+                                            <td>${product.totalPrice.toFixed(2)}</td>
                                             <td>
                                                 <button onClick={() => handledeleteProduct(product.id)}>
                                                     Delete
@@ -104,7 +81,7 @@ function Cart() {
 
                         <div className="total-price">
                             <div className="total">
-                                Total({totalCount} Items): <span>${totalAmount}</span>
+                                Total({totalCount} Items): <span>${totalAmount.toFixed(2)}</span>
                             </div>
                             <div className="btn">
                                 <button>Check Out</button>

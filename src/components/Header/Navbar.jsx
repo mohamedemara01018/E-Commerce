@@ -5,6 +5,7 @@ import { fetchCategories, getCategoryState } from "../../store/slices/categorySl
 import { useEffect } from "react"
 import { STATUS } from "../../utils/status"
 import { getCarts, getCartTotal, getTotalCount } from "../../store/slices/cartSlice"
+import Cartmodel from "../cart-model/Cartmodel"
 
 function Navbar() {
     const dispatch = useDispatch()
@@ -17,7 +18,7 @@ function Navbar() {
     }, [dispatch])
     useEffect(() => {
         dispatch(getCartTotal())
-    }, [totalCount, dispatch,cart])
+    }, [totalCount, dispatch, cart])
     return (
         <nav className='navbar'>
             <div className="header-container-bottom-l">
@@ -61,6 +62,7 @@ function Navbar() {
                     <span>{totalCount}</span>
                     <i className="fa-solid fa-cart-shopping"></i>
                 </Link>
+                <Cartmodel />
             </div>
         </nav>
     )

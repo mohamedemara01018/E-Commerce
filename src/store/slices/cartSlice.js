@@ -28,7 +28,7 @@ const cartSlice = createSlice({
                 let tempCart = state.carts.map((item) => {
                     if (item.id == action.payload.id) {
                         const tempQuantity = item.quantity + action.payload.quantity;
-                        const tempTotalPrice = (item.totalPrice + action.payload.totalPrice).toFixed(2);
+                        const tempTotalPrice = (item.totalPrice + action.payload.totalPrice)
                         toast.success(`the total quantity became ${tempQuantity}`)
                         return {
                             ...item, quantity: tempQuantity, totalPrice: tempTotalPrice
@@ -47,12 +47,17 @@ const cartSlice = createSlice({
         },
 
         getCartTotal: (state) => {
-            let tempAmount = 0
-            state.carts.map((item) => {
-                tempAmount += item.quantity * item.discountPrice;
-            })
-            state.totalAmount = tempAmount.toFixed(2)
-            state.totalCount = state.carts.length;
+            let tempAmount = 0;
+            if (state.carts.length > 0) {
+                state.carts.map((item) => {
+                    tempAmount += item.quantity * item.discountPrice;
+                })
+                state.totalAmount = tempAmount
+                state.totalCount = state.carts.length;
+            } else {
+                state.totalAmount = 0.00
+                state.totalCount = 0;
+            }
         },
 
         clearCart: (state) => {
@@ -66,12 +71,44 @@ const cartSlice = createSlice({
             })
             state.carts = tempCart
             storeInLocalStorage(state.carts);
+        },
+
+        toggleQuantity: (state, action) => {
+            let tempCart = state.carts.map((product) => {
+                if (product.id == action.payload.id) {
+                    let tempQuantity = product.quantity;
+                    let tempPrice = product.discountPrice;
+                    if (action.payload.type == 'INC') {
+                        if (tempQuantity < product.stock) {
+                            tempQuantity += 1;
+                        }
+                        tempPrice *= tempQuantity;
+                        return {
+                            ...product, quantity: tempQuantity, totalPrice: tempPrice
+                        }
+                    }
+                    if (action.payload.type == 'DEC') {
+                        if (tempQuantity > 1) {
+                            tempQuantity -= 1;
+                        }
+                        tempPrice *= tempQuantity;
+                        return {
+                            ...product, quantity: tempQuantity, totalPrice: tempPrice
+                        }
+                    }
+                }
+                else {
+                    return product;
+                }
+            })
+            state.carts = tempCart;
+            storeInLocalStorage(state.carts)
         }
     }
 })
 
 export default cartSlice.reducer;
-export const { addToCard, getCartTotal, clearCart, deleteProduct } = cartSlice.actions
+export const { addToCard, getCartTotal, clearCart, deleteProduct, toggleQuantity } = cartSlice.actions
 
 
 export const getCarts = (state) => state.cart.carts

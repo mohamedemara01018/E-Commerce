@@ -50,8 +50,8 @@ function SingleProduct() {
     }
 
     function addToCart(item) {
-        const discountPrice = (item.price - (item.price * (item.discountPercentage) / 100)).toFixed(2);
-        const totalPrice = (discountPrice * quantity).toFixed(2);
+        const discountPrice = (item.price - (item.price * (item.discountPercentage) / 100))
+        const totalPrice = (discountPrice * quantity)
         dispatch(addToCard({ ...item, totalPrice: totalPrice, discountPrice: discountPrice, quantity: quantity }))
     }
     return (
