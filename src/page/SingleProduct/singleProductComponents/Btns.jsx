@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 
 
-function Btns() {
+function Btns({ addToCart }) {
     return (
         <div className="btns">
-            <button className="add-to-cart">
+            <button className="add-to-cart" onClick={addToCart}>
                 <i className='fas fa-shopping-cart'></i>
                 <span>Add To Cart</span>
             </button>

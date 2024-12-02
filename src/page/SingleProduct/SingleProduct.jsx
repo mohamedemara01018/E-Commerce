@@ -10,24 +10,22 @@ import Price_and_offer from "./singleProductComponents/Price_and_offer";
 import Change_quantity from "./singleProductComponents/Change_quantity";
 import Btns from "./singleProductComponents/Btns";
 import Img_thumb from "./singleProductComponents/Img_thumb";
+import { addToCard, getCarts } from "../../store/slices/cartSlice";
+
 
 function SingleProduct() {
     const dispatch = useDispatch();
     let product = useSelector(getSingleProduct);
     const productStatus = useSelector(getSingleProductStatus)
-    const discountPrice = product.price - (product.price * (product.discountPercentage) / 100).toFixed(2);
     const { id } = useParams();
     const [quantity, setQuantity] = useState(1);
-
+    const cart = useSelector(getCarts);
+    console.log(cart);
 
 
     useEffect(() => {
         dispatch(fetchSingleProduct(id))
     }, [dispatch, id]);
-
-
-    product = { ...product, discountPrice };
-
 
     function increment() {
         return setQuantity(
@@ -51,6 +49,14 @@ function SingleProduct() {
         )
     }
 
+    function addToCart(item) {
+        const discountPrice = item.price - (item.price * (item.discountPercentage) / 100).toFixed(2);
+        const totalPrice = discountPrice.toFixed(2) * quantity;
+
+        dispatch(addToCard({ ...item, totalPrice: totalPrice, discountPrice: discountPrice, quantity: quantity }))
+        
+    }
+
     return (
 
         <main>
@@ -71,7 +77,7 @@ function SingleProduct() {
                                     <Price_and_offer product={product} />
                                     <Change_quantity quantity={quantity} decrement={decrement} increment={increment} />
                                     {(product?.stock === 0) ? <div>out of stock</div> : ""}
-                                    <Btns />
+                                    <Btns addToCart={() => addToCart(product)} />
                                 </div>
                             </div>
                         </div>

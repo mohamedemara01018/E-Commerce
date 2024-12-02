@@ -2,13 +2,14 @@
 
 
 function Price_and_offer({ product }) {
+    const discountPrice = product.price - (product.price * (product.discountPercentage) / 100).toFixed(2);
     return (
         <div className="price-offer">
             <div className="old-price">
                 <span>{product.price}</span> (Inclusive of all taxes)
             </div>
             <div className="new-price">
-                <span>${product.discountPrice.toFixed(2)}</span>
+                <span>${discountPrice.toFixed(2)}</span>
                 <div className="offer">
                     {product.discountPercentage}% OFF
                 </div>
