@@ -6,7 +6,8 @@ function Product({ product }) {
 
     const disCountPrice = product.price - (product.price - (product.price * product.discountPercentage / 100))
     product = { ...product, disCountPrice };
-    // console.log(product);
+
+
     return (
         <Link to={`/product/${product.id}`}>
             <div className="img">

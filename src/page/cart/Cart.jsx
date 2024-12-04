@@ -12,7 +12,6 @@ function Cart() {
     useEffect(() => {
         dispatch(getCartTotal())
     }, [cart, dispatch])
-    console.log(cart)
     if (totalCount <= 0) {
         return <Card_Empty message={'Your shopping cart is empty.'} />
     }

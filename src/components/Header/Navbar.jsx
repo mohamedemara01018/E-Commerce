@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { setSidebarOn } from "../../store/slices/sidebarSlice"
 import { fetchCategories, getCategoryState } from "../../store/slices/categorySlice"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { STATUS } from "../../utils/status"
 import { getCarts, getCartTotal, getTotalCount } from "../../store/slices/cartSlice"
 import Cartmodel from "../cart-model/Cartmodel"
@@ -15,12 +15,9 @@ function Navbar() {
     const cart = useSelector(getCarts)
     const productTitle = useSelector(getProductTitle);
     const [search, setSearch] = useState('')
-    //  the title of all product;
-    // const [productTitle, setProductTitle] = useState([]);
     useEffect(() => {
         dispatch(setProductTitle(search.toString()))
     }, [search, dispatch])
-    console.log(productTitle);
     useEffect(() => {
         dispatch(fetchCategories());
     }, [dispatch])
@@ -28,6 +25,13 @@ function Navbar() {
         dispatch(getCartTotal())
     }, [totalCount, dispatch, cart])
 
+    let refLink = useRef(null)
+    function handleClick(event) {
+        if (event.key === 'Enter' && refLink.current) {
+            refLink.current.click()
+            setSearch('')
+        };
+    }
     return (
         <nav className='navbar'>
             <div className="header-container-bottom-l">
@@ -46,7 +50,7 @@ function Navbar() {
             <div className="header-container-bottom-m">
                 <div className='middle-container'>
                     <div className="input-container">
-                        <input type="text" placeholder='Search here' value={search} onChange={(e) => setSearch(e.target.value)} />
+                        <input type="text" placeholder='Search here' value={search} onChange={(e) => setSearch(e.target.value)} onKeyDown={(e) => handleClick(e)} />
                         <div className="auto-complete" data-show={productTitle.length > 0 ? true : false}>
                             <ul>
                                 {
@@ -60,7 +64,7 @@ function Navbar() {
                                 }
                             </ul>
                         </div>
-                        <Link to={(search.length > 0) ? `/search/${search}` : '/'}>
+                        <Link ref={refLink} to={(search.length > 0) ? `/search/${search}` : null}>
                             <i className="fa-solid fa-magnifying-glass"></i>
                         </Link>
                     </div>
