@@ -14,7 +14,7 @@ function Cart() {
     }, [cart, dispatch])
     console.log(cart)
     if (totalCount <= 0) {
-        return <Card_Empty />
+        return <Card_Empty message={'Your shopping cart is empty.'} />
     }
 
     function clearTheCart() {

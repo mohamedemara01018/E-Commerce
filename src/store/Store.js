@@ -4,6 +4,7 @@ import categorySlice from './slices/categorySlice'
 import productSlice from './slices/productSlice'
 import categoryProductSlice from './slices/categoryProductSlice'
 import cartSlice from './slices/cartSlice'
+import searchSlice from './slices/searchSlice'
 const store = configureStore({
     reducer: {
         sidebar: sidebarSlice,
@@ -11,6 +12,7 @@ const store = configureStore({
         product: productSlice,
         categoryProduct: categoryProductSlice,
         cart: cartSlice,
+        search: searchSlice
     }
 })
 

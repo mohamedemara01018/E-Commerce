@@ -2,23 +2,32 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { setSidebarOn } from "../../store/slices/sidebarSlice"
 import { fetchCategories, getCategoryState } from "../../store/slices/categorySlice"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { STATUS } from "../../utils/status"
 import { getCarts, getCartTotal, getTotalCount } from "../../store/slices/cartSlice"
 import Cartmodel from "../cart-model/Cartmodel"
+import { getProductTitle, setProductTitle } from "../../store/slices/productSlice"
 
 function Navbar() {
     const dispatch = useDispatch()
     const category = useSelector(getCategoryState);
     const totalCount = useSelector(getTotalCount);
     const cart = useSelector(getCarts)
-
+    const productTitle = useSelector(getProductTitle);
+    const [search, setSearch] = useState('')
+    //  the title of all product;
+    // const [productTitle, setProductTitle] = useState([]);
+    useEffect(() => {
+        dispatch(setProductTitle(search.toString()))
+    }, [search, dispatch])
+    console.log(productTitle);
     useEffect(() => {
         dispatch(fetchCategories());
     }, [dispatch])
     useEffect(() => {
         dispatch(getCartTotal())
     }, [totalCount, dispatch, cart])
+
     return (
         <nav className='navbar'>
             <div className="header-container-bottom-l">
@@ -37,8 +46,21 @@ function Navbar() {
             <div className="header-container-bottom-m">
                 <div className='middle-container'>
                     <div className="input-container">
-                        <input type="text" placeholder='Search here' />
-                        <Link to={`/Search`}>
+                        <input type="text" placeholder='Search here' value={search} onChange={(e) => setSearch(e.target.value)} />
+                        <div className="auto-complete" data-show={productTitle.length > 0 ? true : false}>
+                            <ul>
+                                {
+                                    productTitle.map((product) => {
+                                        return <li key={product.id} onClick={() => setSearch('')}>
+                                            <Link className="link" to={`/search/${product.title}`}>
+                                                {product.title}
+                                            </Link>
+                                        </li>
+                                    })
+                                }
+                            </ul>
+                        </div>
+                        <Link to={(search.length > 0) ? `/search/${search}` : '/'}>
                             <i className="fa-solid fa-magnifying-glass"></i>
                         </Link>
                     </div>

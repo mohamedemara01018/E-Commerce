@@ -19,8 +19,20 @@ const productSlice = createSlice({
         productsStatus: STATUS.IDLE,
         singleProduct: {},
         singleProductStatus: STATUS.IDLE,
+        productTitle: [],
     },
-    reducers: {},
+    reducers: {
+        setProductTitle: (state, action) => {
+            if (action.payload.length > 0) {
+                state.productTitle = state.products.filter((item) => {
+                    return item.title.toLowerCase().includes(action.payload.toLowerCase())
+                })
+            } else {
+                state.productTitle = []
+            }
+
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchProducts.pending, (state) => {
@@ -50,11 +62,12 @@ const productSlice = createSlice({
 })
 
 export default productSlice.reducer
-
+export const { setProductTitle } = productSlice.actions
 
 // all products
 export const getProduct = (state) => state.product.products;
 export const getProductStatus = (state) => state.product.productsStatus;
+export const getProductTitle = (state) => state.product.productTitle;
 
 
 // single products
