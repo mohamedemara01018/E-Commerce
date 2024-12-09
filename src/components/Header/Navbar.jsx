@@ -15,12 +15,15 @@ function Navbar() {
     const cart = useSelector(getCarts)
     const productTitle = useSelector(getProductTitle);
     const [search, setSearch] = useState('')
+
     useEffect(() => {
         dispatch(setProductTitle(search.toString()))
     }, [search, dispatch])
+
     useEffect(() => {
         dispatch(fetchCategories());
     }, [dispatch])
+
     useEffect(() => {
         dispatch(getCartTotal())
     }, [totalCount, dispatch, cart])

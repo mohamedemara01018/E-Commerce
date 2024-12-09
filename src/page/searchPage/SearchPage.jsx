@@ -8,9 +8,7 @@ import { useParams } from 'react-router-dom'
 import Card_Empty from '../../components/cart-empty/Card_Empty'
 
 function SearchPage() {
-
-
-
+    
     const dispatch = useDispatch()
     const searchProduct = useSelector(getSearchProduct);
     const searchProductStatus = useSelector(getSearchProductStatus);
