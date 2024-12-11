@@ -4,7 +4,6 @@ import { BASEURL } from "../../utils/URL";
 
 
 export const fetchSearchProduct = createAsyncThunk('searchSlice/fetchSearchProduct', async (searchTerm) => {
-    console.log('enter')
     const response = await fetch(`${BASEURL}products/search?q=${searchTerm}`);
     const data = await response.json();
     console.log(data)
